@@ -245,12 +245,12 @@ The maximum number of steps, 206.17, occurs in the 5-minute interval that begins
 <h2>Imputing missing values</h2>
 
 <p><br>
-The presence of missing values may introduce bias into some calculations or summaries of the data.</p>
+Calculate the number of missing values</p>
 
 <pre><code class="r">activity_countofnasteps &lt;- sum(is.na(activity$steps))
 </code></pre>
 
-<p>There are 2304 missing steps values across a number of days/intervals. To minimize bias the average number of steps taken across all days by the 5-minute interval is used to impute the missing steps values.
+<p>There are 2304 missing steps values across a number of days/intervals.
 <br>
 Histogram of the total number of steps taken per day using the <strong>imputed</strong> data.</p>
 
@@ -270,35 +270,12 @@ activity_dailytotalmedian_imputed &lt;- as.integer(median(activity_dailytotal_im
 </code></pre>
 
 <p>The mean and median total number of steps taken per day are 9530.72 and 10439 respectively.
-<br>
-The following table shows the mean and median total number of steps taken per day using the original and imputed data.
-<br>
-  <style>
-  table,th,td
-{
-  border:1px solid black;
-}
-</style>
-  <table style="width:300px">
-  <tr>
-  <td><b>Data</td>
-  <td><b>Mean</td>
-  <td><b>Median</td>
-  </tr>
-  <tr>
-  <td>Original</td>
-  <td>9354.23</td>
-  <td>10395</td>
-  </tr>
-  <tr>
-  <td>Imputed</td>
-  <td>9530.72</td>
-  <td>10439</td>
-  </tr>
-  </table>
-  The mean total number of steps taken per day using the imputed data are larger than that using the original data, and the median total number of steps taken per day using the imputed data are larger than that using the original data.
-<br>
-A panel plot containing time series plots of the 5-minute interval and the average number of steps taken across all weekday days or weekend days using the <strong>imputed</strong> data.</p>
+<br></p>
+
+<h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+
+<p><br>
+A series of plot that contains a time series plots of the 5-minute interval and the average number of steps taken across all weekday days or weekend days using the <strong>imputed</strong> data.</p>
 
 <pre><code class="r">activity_imputed$weekdays &lt;- weekdays(activity_imputed$date)
 activity_imputed$weekday &lt;- as.factor(ifelse(activity_imputed$weekdays %in% 

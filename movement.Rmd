@@ -31,11 +31,11 @@ activity_maxintervalmean <- activity_intervalmean[activity_intervalmean$steps==m
 The maximum number of steps, `r round(max(activity_intervalmean$steps), digits=2)`, occurs in the 5-minute interval that begins at `r sprintf("%02d:%02d", activity_maxintervalmean%/%100, activity_maxintervalmean%%100)`.
 ## Imputing missing values
 <br>
-The presence of missing values may introduce bias into some calculations or summaries of the data.
+Calculate the number of missing values
 ```{r missigvalue, echo=TRUE}
 activity_countofnasteps <- sum(is.na(activity$steps))
 ```
-There are `r activity_countofnasteps` missing steps values across a number of days/intervals. To minimize bias the average number of steps taken across all days by the 5-minute interval is used to impute the missing steps values.
+There are `r activity_countofnasteps` missing steps values across a number of days/intervals.
 <br>
 Histogram of the total number of steps taken per day using the **imputed** data.
 ```{r dailytotal_imputed, echo=TRUE}
@@ -48,34 +48,9 @@ activity_dailytotalmedian_imputed <- as.integer(median(activity_dailytotal_imput
 ```
 The mean and median total number of steps taken per day are `r round(activity_dailytotalmean_imputed, digits=2)` and `r activity_dailytotalmedian_imputed` respectively.
 <br>
-The following table shows the mean and median total number of steps taken per day using the original and imputed data.
+## Are there differences in activity patterns between weekdays and weekends?
 <br>
-  <style>
-  table,th,td
-{
-  border:1px solid black;
-}
-</style>
-  <table style="width:300px">
-  <tr>
-  <td><b>Data</td>
-  <td><b>Mean</td>
-  <td><b>Median</td>
-  </tr>
-  <tr>
-  <td>Original</td>
-  <td>`r round(activity_dailytotalmean, digits=2)`</td>
-  <td>`r activity_dailytotalmedian`</td>
-  </tr>
-  <tr>
-  <td>Imputed</td>
-  <td>`r round(activity_dailytotalmean_imputed, digits=2)`</td>
-  <td>`r activity_dailytotalmedian_imputed`</td>
-  </tr>
-  </table>
-  The mean total number of steps taken per day using the imputed data are `r ifelse(activity_dailytotalmean_imputed>activity_dailytotalmean, "larger ", "smaller ")`than that using the original data, and the median total number of steps taken per day using the imputed data are `r ifelse(activity_dailytotalmedian_imputed>activity_dailytotalmedian, "larger ", "smaller ")`than that using the original data.
-<br>
-A panel plot containing time series plots of the 5-minute interval and the average number of steps taken across all weekday days or weekend days using the **imputed** data.
+A series of plot that contains a time series plots of the 5-minute interval and the average number of steps taken across all weekday days or weekend days using the **imputed** data.
 ```{r intervalmean_imputed, echo=TRUE}
 activity_imputed$weekdays <- weekdays(activity_imputed$date)
 activity_imputed$weekday <- as.factor(ifelse(activity_imputed$weekdays %in% c("Saturday", "Sunday"), "weekend", "weekday"))

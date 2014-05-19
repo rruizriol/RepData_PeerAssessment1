@@ -52,13 +52,13 @@ activity_maxintervalmean <- activity_intervalmean[activity_intervalmean$steps ==
 The maximum number of steps, 206.17, occurs in the 5-minute interval that begins at 08:35.
 ## Imputing missing values
 <br>
-The presence of missing values may introduce bias into some calculations or summaries of the data.
+Calculate the number of missing values
 
 ```r
 activity_countofnasteps <- sum(is.na(activity$steps))
 ```
 
-There are 2304 missing steps values across a number of days/intervals. To minimize bias the average number of steps taken across all days by the 5-minute interval is used to impute the missing steps values.
+There are 2304 missing steps values across a number of days/intervals.
 <br>
 Histogram of the total number of steps taken per day using the **imputed** data.
 
@@ -81,34 +81,9 @@ activity_dailytotalmedian_imputed <- as.integer(median(activity_dailytotal_imput
 
 The mean and median total number of steps taken per day are 9530.72 and 10439 respectively.
 <br>
-The following table shows the mean and median total number of steps taken per day using the original and imputed data.
+## Are there differences in activity patterns between weekdays and weekends?
 <br>
-  <style>
-  table,th,td
-{
-  border:1px solid black;
-}
-</style>
-  <table style="width:300px">
-  <tr>
-  <td><b>Data</td>
-  <td><b>Mean</td>
-  <td><b>Median</td>
-  </tr>
-  <tr>
-  <td>Original</td>
-  <td>9354.23</td>
-  <td>10395</td>
-  </tr>
-  <tr>
-  <td>Imputed</td>
-  <td>9530.72</td>
-  <td>10439</td>
-  </tr>
-  </table>
-  The mean total number of steps taken per day using the imputed data are larger than that using the original data, and the median total number of steps taken per day using the imputed data are larger than that using the original data.
-<br>
-A panel plot containing time series plots of the 5-minute interval and the average number of steps taken across all weekday days or weekend days using the **imputed** data.
+A series of plot that contains a time series plots of the 5-minute interval and the average number of steps taken across all weekday days or weekend days using the **imputed** data.
 
 ```r
 activity_imputed$weekdays <- weekdays(activity_imputed$date)
